@@ -21,3 +21,4 @@ def contact_page(request):
         "content": "Contact Page"
     }
     return render(request, "contact/view.html", context)
+    
