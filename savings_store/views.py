@@ -7,10 +7,10 @@ def home_page(request):
     context = {
         "title": "Home Page",
         "content": "Home Page"
-        }
+    }
     if request.user.is_authenticated:
-    return render(request, "home_page.html", context)
-
+        return render(request, "home_page.html", context)
+    
 def about_page(request):
     context = {
         "title": "About us",
@@ -34,22 +34,20 @@ def login_page(request):
     context = {
         "form": form
     }
-    print("User logged in")
     
     if form.is_valid():
         print(form.cleaned_data)
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(request, username=username, password=password)
-        print(user)
         
-        if user not None:
-            print(request.user.is_authenticated)
-            login(request, user)
+        if user is not None:
             print("Login Valid")
-        return redirect("/")
-    else: 
-        print("Invalid Login")
+            login(request, user)
+            return redirect("/")
+        else: 
+            print("Invalid Login")
+
     return render(request, "auth/login.html", context)
 
 User = get_user_model()
