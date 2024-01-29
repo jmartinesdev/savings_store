@@ -31,12 +31,11 @@ class ProductDetailView(DetailView):
 def product_detail_view(request, pk=None, *args, **kwargs):
     #instance = Product.objects.get(pk = pk)
     #instance = get_object_or_404(Product, pk = pk)
-    try:
-        instance = Product.objects.get(id = pk)
-    except Product.DoesNotExist:
-        print('None product found it.')
-        raise Http404("This product does not exist")
-    
+    if qs.count() == 1: 
+        instance = qs.first()
+    else:
+        raise Http404("This product does exist!")      
+
     context = {
         'object': instance
     }
