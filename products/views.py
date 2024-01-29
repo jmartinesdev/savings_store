@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Product
 
@@ -27,9 +27,11 @@ class ProductDetailView(DetailView):
         print(context)
         return context
     
-def ProductDetailView(request)
-    query_set = Product.objects.all()
+def product_detail_view(request, pk=None, *args, **kwargs):
+    instance = Product.objects.get(pk = pk)
+    instance = get_object_or_404(Product, pk = pk)
+    queryset = Product.objects.all()
     context = {
-        'object_list': query_set
+        'object': instance
     }
     return render(request, "products/detail.html", context)
