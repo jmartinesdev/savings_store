@@ -4,7 +4,6 @@ from django.views.generic import ListView, DetailView
 from .models import Product
 
 class ProductListView(ListView):
-    queryset = Product.objects.all()
     template_name = "products/products_list.html"
 
     def get_context_data(self, *args, **kwargs):
@@ -20,7 +19,7 @@ def product_list_view(request):
     return render(request, "products/products_list.html", context)
 
 class ProductDetailView(DetailView):
-    queryset = Product.objects.all()
+    #queryset = Product.objects.all()
     template_name = "products/detail.html"
     
     def get_context_data(self, *args, **kwargs):
@@ -28,13 +27,18 @@ class ProductDetailView(DetailView):
         print(context)
         return context
     
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        instance = Product.objects.get_by_id(pk)
+        if instance is None:
+            raise Http404("This product doesn't exist!")
+        return instance
+    
 def product_detail_view(request, pk=None, *args, **kwargs):
-    #instance = Product.objects.get(pk = pk)
-    #instance = get_object_or_404(Product, pk = pk)
-    if qs.count() == 1: 
-        instance = qs.first()
-    else:
-        raise Http404("This product does exist!")      
+    instance = Product.objects.get_by_id(pk)
+    print(instance)
+    if instance is None:
+        raise Http404("This product doesn't exist")     
 
     context = {
         'object': instance
