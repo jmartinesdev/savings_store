@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-h%56(t@xk(^30@0nz2hzm^m71-n^n@cmq10ju7zy4ky+h^l&if
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['medalecommerce.herokuapp.com']
 
 
 # Application definition
@@ -124,8 +124,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_local")]
-
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
