@@ -1,1 +1,1 @@
-web: gunicorn savings_store.wsgi:app
+web: gunicorn savings_store.wsgi:application
