@@ -9,7 +9,7 @@ from .views import home_page, about_page, contact_page, login_page, register_pag
 
 urlpatterns = [
     path('register/', register_page),
-	path('home/', home_page, name='home'),
+	path('', home_page),
 	path('about/', about_page),
 	path('contact/', contact_page),
     path('accounts/', include('django.contrib.auth.urls')),
