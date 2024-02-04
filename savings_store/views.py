@@ -1,15 +1,16 @@
 from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm, LoginForm, RegisterForm
 
+@login_required
 def home_page(request):
     context = {
         "title": "Home Page",
         "content": "Home Page"
     }
-    if request.user.is_authenticated:
-        return render(request, "home_page.html", context)
+    return render(request, "home_page.html", context)
     
 def about_page(request):
     context = {
