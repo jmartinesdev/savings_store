@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -11,6 +12,7 @@ urlpatterns = [
 	path('', home_page),
 	path('about/', about_page),
 	path('contact/', contact_page),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('login/', login_page),
     path('featured/', ProductFeaturedListView.as_view()),
     path('featured/<int:pk>/', ProductFeaturedDetailView.as_view()),
